@@ -28,7 +28,7 @@ namespace TaskEmployeeManagementSystem
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Employee}/{action=Create}/{id?}");
 
             app.Run();
         }

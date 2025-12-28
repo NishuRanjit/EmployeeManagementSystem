@@ -5,8 +5,8 @@ using TaskEmployeeManagementSystem.Models;
 
 namespace TaskEmployeeManagementSystem.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class EmployeeController : Controller
     {
       
@@ -26,9 +26,10 @@ namespace TaskEmployeeManagementSystem.Controllers
             empdata.Salary=employee.Salary;
             empdata.Bonus=employee.Bonus;
 
-
-
-            _staticEmployee.Add(employee);
+            if (employee != null)
+            {
+                _staticEmployee.Add(employee);
+            }
        return RedirectToAction("Index"); }
     }
 }
