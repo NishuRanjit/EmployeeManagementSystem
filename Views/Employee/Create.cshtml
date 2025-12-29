@@ -9,6 +9,13 @@
         ViewData["Title"] = "Employee/Manager";
     }
 
+    @if (ViewBag.Error != null || ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Error!</strong>@(ViewBag.Error ??ViewBag.ErrorMessage)
+        </div>}
+
+   
     <div class="text-center">
         <h1 class="display-4">Employee Management System</h1>
       

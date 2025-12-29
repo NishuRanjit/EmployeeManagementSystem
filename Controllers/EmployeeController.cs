@@ -25,32 +25,73 @@ namespace TaskEmployeeManagementSystem.Controllers
             return View(_staticEmployee);
         }
         [HttpPost]
-        public IActionResult Create(Employee employee,Manager manager, string employeetype)
+        public IActionResult Create(Employee employee, Manager manager, string employeetype)
         {
-          
 
-            Employee choosenemployee;
-            if (employeetype == "Manager")
+            if (string.IsNullOrEmpty(employee.Name)  )
             {
-                choosenemployee = new Manager
+                ViewBag.Error = "All the field must be included";
+                return View();
+            }
+            try
+            {
+
+                Employee choosenemployee;
+                if (employeetype == "Manager")
                 {
-                    Id = employee.Id,
-                    Name = employee.Name,
-                    Salary = employee.Salary,
-                    TeamSize = manager.TeamSize
+                    choosenemployee = new Manager
+                    {
+                        Id = employee.Id,
+                        Name = employee.Name,
+                        Salary = employee.Salary,
+                        TeamSize = manager.TeamSize
 
 
-                };
+                    };
+                }
+                else
+                {
+                    choosenemployee = new Employee
+                    {
+                        Id = employee.Id,
+                        Name = employee.Name,
+                        Salary = employee.Salary,
+                    };
+                }
+
+                choosenemployee.Bonus = choosenemployee.CalculateBonus();
+               
+                _staticEmployee.Add(choosenemployee);
+                return RedirectToAction("Detail");
             }
-            else
+            catch (Exception ex)
             {
-                choosenemployee = employee;
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
             }
-            choosenemployee.Bonus = choosenemployee.CalculateBonus();
-            _staticEmployee.Add(choosenemployee);
-            return RedirectToAction("Detail");
+           
         }
-    }       
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Employee empfound = null;
+            foreach (var emp in _staticEmployee)
+            {
+                if (emp.Id == id)
+                {
+                    empfound = emp;
+                    break;
+                }
+            }
+                if (empfound != null)
+                {
+                    _staticEmployee.Remove(empfound); 
+                }
+            
+                return RedirectToAction("Detail");
+            
+        }
+    }
       
     
 }
