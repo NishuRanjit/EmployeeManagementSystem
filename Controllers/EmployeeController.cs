@@ -14,7 +14,7 @@ namespace TaskEmployeeManagementSystem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(_staticEmployee);
         }
         public IActionResult Create()
         {
@@ -22,7 +22,7 @@ namespace TaskEmployeeManagementSystem.Controllers
         }
         public IActionResult Detail()
         {
-            return View(_staticEmployee);
+            return View();
         }
         [HttpPost]
         public IActionResult Create(Employee employee, Manager manager, string employeetype)
@@ -62,7 +62,7 @@ namespace TaskEmployeeManagementSystem.Controllers
                 choosenemployee.Bonus = choosenemployee.CalculateBonus();
                
                 _staticEmployee.Add(choosenemployee);
-                return RedirectToAction("Detail");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -71,6 +71,26 @@ namespace TaskEmployeeManagementSystem.Controllers
             }
            
         }
+        
+        
+        
+                [HttpGet]
+        public IActionResult IndividualDetail(int id)
+        {
+            Employee empfound = null;
+            foreach (var emp in _staticEmployee)
+            {
+                if (emp.Id == id)
+                {
+                    empfound = emp;
+                    break;
+                }
+            }
+                return View("Detail",empfound);
+            
+        }
+    
+        
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -88,7 +108,7 @@ namespace TaskEmployeeManagementSystem.Controllers
                     _staticEmployee.Remove(empfound); 
                 }
             
-                return RedirectToAction("Detail");
+                return RedirectToAction("Index");
             
         }
     }
