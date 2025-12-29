@@ -5,7 +5,16 @@
     <title></title>
 </head>
 <body>
-<form action="/Employee/EmployeeData"method="post">
+    @{
+        ViewData["Title"] = "Employee/Manager";
+    }
+
+    <div class="text-center">
+        <h1 class="display-4">Employee Management System</h1>
+      
+
+    </div>
+<form action="/Employee/Create"method="post">
     <label for="Id">Id:</label><br />
         <input type="number" id="Id" name="Id"><br />
         <label for="Name">Name:</label><br />
@@ -13,22 +22,24 @@
         <label for="Salary">Salary:</label><br />
         <input type="number" id="Salary" name="Salary"> <br />
         <label for="Role">Role</label> <br />
-        <select name="Role" id="Role">
+        <select name="employeetype" id="Role">
             <br />
       <option value="Employee">Employee </option>
       <option value="Manager">Manager </option>
             </select>
 
         <div id="Show manager" style="display:none;">
-            <br /> <label for="TeamSize">TeamSize:</label><br />
+            <br />
+            
+            <label for="TeamSize">TeamSize:</label><br />
             <input type="number" id="TeamSize" name="TeamSize"><br /><br />
         </div><br />
-           <br /> <button type="submit" onclick="alert('Role confirmed')">Save</button>
+        <br /> <button type="submit" onclick="alert('Role confirmed')">Save</button>
 
-      
-       
-       
-</form>
+
+
+
+    </form>
 
 
 <script>
@@ -39,11 +50,17 @@
         }
         else{
             section.style.display='none';
+                document.getElementById('TeamSize').value = '';
         }
+           
+        
 
     });
 
 </script>
+<br />
+<a asp-controller="Employee" asp-action="Index" class="btn btn-primary">Home</a>
+<a asp-controller="Employee" asp-action="Detail" class="btn btn-primary">Detail</a>
 
 </body>
 </html>

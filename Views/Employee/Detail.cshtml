@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Detaile</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }</style>
+</head>
+
+
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Employee Management System</h1>
+    </div>
+<table style="width:100%">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Salary</th>
+        <th>Teamsize</th>
+        <th>Bonus</th>
+
+</tr>
+<tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.Name</td>
+                    <td>@emp.Role</td>
+                    <td>@emp.Salary</td>
+                    <td>
+                        @{
+                            
+                            var mgr = emp as TaskEmployeeManagementSystem.Models.Manager;
+
+                            if (mgr != null)
+                            {
+                                
+                                @mgr.TeamSize
+                            }
+                            else
+                            {
+                                
+                                @:-
+                            }
+                        }
+                    </td>
+                    <td>@emp.Bonus</td>
+                </tr>
+            }
+            </tbody>
+        </table><br />
+        <br />
+        <a  asp-controller="Employee" asp-action="Index" class="btn btn-primary">Home</a>
+    <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Create</a>
+    </body>
+</html>

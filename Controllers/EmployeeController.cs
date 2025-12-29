@@ -9,27 +9,48 @@ namespace TaskEmployeeManagementSystem.Controllers
     //[ApiController]
     public class EmployeeController : Controller
     {
-      
-        private static List<Employee> _staticEmployee=new List<Employee>();
+
+        private static List<Employee> _staticEmployee = new List<Employee>();
         [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult Create()
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult EmployeeData(Employee employee)
+        public IActionResult Detail()
         {
-            var empdata = new Employee();
-            empdata.Id = employee.Id;
-            empdata.Name=employee.Name;
-            empdata.Role=employee.Role;
-            empdata.Salary=employee.Salary;
-            empdata.Bonus=employee.Bonus;
+            return View(_staticEmployee);
+        }
+        [HttpPost]
+        public IActionResult Create(Employee employee,Manager manager, string employeetype)
+        {
+          
 
-            if (employee != null)
+            Employee choosenemployee;
+            if (employeetype == "Manager")
             {
-                _staticEmployee.Add(employee);
+                choosenemployee = new Manager
+                {
+                    Id = employee.Id,
+                    Name = employee.Name,
+                    Salary = employee.Salary,
+                    TeamSize = manager.TeamSize
+
+
+                };
             }
-       return RedirectToAction("Index"); }
-    }
+            else
+            {
+                choosenemployee = employee;
+            }
+            choosenemployee.Bonus = choosenemployee.CalculateBonus();
+            _staticEmployee.Add(choosenemployee);
+            return RedirectToAction("Detail");
+        }
+    }       
+      
+    
 }
