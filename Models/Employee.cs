@@ -40,7 +40,7 @@
                 }
                 else
                 {
-                    throw new Exception("Salary must be greater than zero");
+                    throw new Exception("Salary cannot be empty and should be greater than zero");
                 }
             }
         }
