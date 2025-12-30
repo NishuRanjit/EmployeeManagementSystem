@@ -89,8 +89,41 @@ namespace TaskEmployeeManagementSystem.Controllers
                 return View("Detail",empfound);
             
         }
-    
-        
+        [HttpPost]
+        public IActionResult IndividualDetail(int id, string name, int salary, int teamsize)
+        {
+            try
+            {
+                foreach (var emp in _staticEmployee)
+                {
+                    if (emp.Id == id)
+                    {
+                        emp.Name = name;
+                        emp.Salary = salary;
+
+
+                        Manager manager = emp as Manager;
+                        if (manager != null)
+                        {
+                            manager.TeamSize = teamsize;
+                        }
+
+                        emp.Bonus = emp.CalculateBonus();
+                        break;
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Detail");
+            }
+        }
+
+
+
         [HttpPost]
         public IActionResult Delete(int id)
         {

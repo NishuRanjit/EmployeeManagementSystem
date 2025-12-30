@@ -1,4 +1,4 @@
-﻿@model TaskEmployeeManagementSystem.Models.Employee
+﻿
 
 <!DOCTYPE html>
 
@@ -14,32 +14,39 @@
 
 <h1>Detail for @Model.Name</h1>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">ID:</dt>
-        <dd class="col-sm-10">@Model.Id</dd>
-
-        <dt class="col-sm-2">Name:</dt>
-        <dd class="col-sm-10">@Model.Name</dd>
-
-        <dt class="col-sm-2">Salary:</dt>
-        <dd class="col-sm-10">@Model.Salary</dd>
-
-        <dt class="col-sm-2">Bonus:</dt>
-        <dd class="col-sm-10">@Model.Bonus</dd>
-
-        @if (Model is TaskEmployeeManagementSystem.Models.Manager mgr)
-        {
-            <dt class="col-sm-2">Team Size:</dt>
-            <dd class="col-sm-10">@mgr.TeamSize</dd>
+<form asp-action="IndividualDetail"method="post">
+    <input type="hidden"name="id"value="@Model.Id" />
+    <p>
+        <b>ID:</b>@Model.Id</b>
+    </p>
+        <p>
+            <label>Name:</label>
+            <input type="text" name="name" value="@Model.Name" />
+        </p>
+        <p>
+            <label>Salary:</label>
+            <input type="number" name="salary" value="@Model.Salary" required min="1" />
+        </p>
+        <p>
+            <label>Bonus:</label>
+            <input type="number" name="bonus" value="@Model.Bonus" />
+        </p>
+       
+    @if(Model is TaskEmployeeManagementSystem.Models.Manager mgr)
+    {
+    <p>
+                <label>Team Size:</label>
+                <input type="number"name="teamsize"value="@mgr.TeamSize" />
+            </p>
         }
-    </dl>
-</div>
+        else
+        {
+            <input type="hidden"name="teamsize"value="0" />
+        }
+        <button type="submit">Update</button>
+        <a asp-controller="Employee" asp-action="Index" class="btn btn-light">Cancel</a>
 
-<div>
-    <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Back to List</a>
 
-</div>
+</form>
 </body>
 </html>
