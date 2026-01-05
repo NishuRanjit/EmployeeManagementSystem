@@ -1,81 +1,81 @@
 ﻿
-<!DOCTYPE html>
+        <!DOCTYPE html>
 
 
 
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Employee Management System</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }</style>
-</head>
+        <html>
+        <head>
+            <meta charset="utf-8" />
+            <title>Employee Management System</title>
+            <style>
+                table, th, td {
+                    border: 1px solid black;
+                }</style>
+        </head>
 
 
-<body>
-    <div class="text-center">
-        <h1 class="display-4">Employee Management System</h1>
-    </div>
-    <table style="width:100%">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Salary</th>
-            <th>Teamsize</th>
-            <th>Bonus</th>
-            <th>Info</th>
-            <th>Action</th>
-
-        </tr>
-        <tbody>
-            @foreach (var emp in Model)
-            {
+        <body>
+            <div class="text-center">
+                <h1 class="display-4">Employee Management System</h1>
+            </div>
+            <table style="width:100%">
                 <tr>
-                    <td>@emp.Id</td>
-                    <td>@emp.Name</td>
-                    <td>@emp.Role</td>
-                    <td>@emp.Salary</td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Salary</th>
+                    <th>Teamsize</th>
+                    <th>Bonus</th>
+                    <th>Info</th>
+                    <th>Action</th>
 
-                    <td>
-                        @{
-
-                            var mgr = emp as TaskEmployeeManagementSystem.Models.Manager;
-
-                            if (mgr != null)
-                            {
-
-                                @mgr.TeamSize
-                            }
-                            else
-                            {
-
-                                @:-
-                            }
-                        }
-                    </td>
-                    <td>@emp.Bonus</td>
-                    <td>
-                        <a asp-action="IndividualDetail" asp-route-id="@emp.Id" class="btn btn-info">Detail</a>
-                    </td>
-                    <td>
-                        <form asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@emp.Id" />
-                            <button type="submit" class="btn btn-warning">Delete</button>
-                        </form>
-                    </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <br />
-    <br />
+                <tbody>
+                    @foreach (var emp in Model)
+                    {
+                        <tr>
+                            <td>@emp.Id</td>
+                            <td>@emp.Name</td>
+                            <td>@emp.Role</td>
+                            <td>@emp.Salary</td>
+
+                            <td>
+                                @{
+
+                                    var mgr = emp as TaskEmployeeManagementSystem.Models.Manager;
+
+                                    if (mgr != null)
+                                    {
+
+                                        @mgr.TeamSize
+                                    }
+                                    else
+                                    {
+
+                                        @:-
+                                    }
+                                }
+                            </td>
+                            <td>@emp.Bonus</td>
+                            <td>
+                                <a asp-action="IndividualDetail" asp-route-id="@emp.Id" class="btn btn-info">Detail</a>
+                            </td>
+                            <td>
+                                <form asp-action="Delete" method="post">
+                                    <input type="hidden" name="id" value="@emp.Id" />
+                                    <button type="submit" class="btn btn-warning">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <br />
    
-    <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Create</a>
-</body>
-</html>
+            <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Create</a>
+        </body>
+        </html>
 
 
 

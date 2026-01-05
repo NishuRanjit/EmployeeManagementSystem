@@ -28,11 +28,7 @@ namespace TaskEmployeeManagementSystem.Controllers
         public IActionResult Create(Employee employee, Manager manager, string employeetype)
         {
 
-            if (string.IsNullOrEmpty(employee.Name)  )
-            {
-                ViewBag.Error = "All the field must be included";
-                return View();
-            }
+            
             try
             {
 

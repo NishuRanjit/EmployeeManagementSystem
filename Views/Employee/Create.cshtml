@@ -7,10 +7,10 @@
 <body>
     
 
-    @if (ViewBag.Error != null || ViewBag.ErrorMessage != null)
+    @if ( ViewBag.ErrorMessage != null)
     {
         <div class="alert alert-danger">
-            <strong>Error!</strong>@(ViewBag.Error ??ViewBag.ErrorMessage)
+            <strong>Error!</strong>@(ViewBag.ErrorMessage)
         </div>}
 
    

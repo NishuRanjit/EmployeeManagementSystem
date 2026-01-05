@@ -22,7 +22,25 @@
                 }
             }
         }
-        public string Name { get; set; }
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new Exception("Name cannot be empty ");
+                }
+                else
+                {
+                    name = value;
+                }
+            }
+        }
         public string Role { get; set; } = "Employee";
 
         private decimal salary;
