@@ -88,8 +88,7 @@ namespace TaskEmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult IndividualDetail(int id, string name, int salary, int teamsize)
         {
-            try
-            {
+            
                 foreach (var emp in _staticEmployee)
                 {
                     if (emp.Id == id)
@@ -110,13 +109,8 @@ namespace TaskEmployeeManagementSystem.Controllers
                 }
 
                 return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.ErrorMessage = ex.Message;
-                return View("Detail");
-            }
         }
+           
 
 
 
