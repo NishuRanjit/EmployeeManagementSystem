@@ -2,7 +2,27 @@
 {
     public class Manager:Employee
     {
-        public int? TeamSize { get; set; }
+        private int? teamsize;
+        public int? TeamSize
+        {
+            get
+            {
+                return teamsize;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    teamsize = value;
+                    
+                }
+                else
+                {
+                    throw new Exception("TeamSize cannot be negative or empty");
+                }
+            }
+        }
+            
         public Manager(){
             Role = "Manager";
             }
